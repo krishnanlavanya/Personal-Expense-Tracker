@@ -1,0 +1,43 @@
+.card {
+	width: 18rem;
+    margin: 5px 22px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 7px -1px grey;
+    background: white;
+}
+
+.main-wrapper {
+  background-color: white
+}
+
+.main-container {
+  margin-top: 10px;    
+  padding: 10px
+}
+
+.row.main-row {
+  background-color: white;
+  padding: 10px;  
+  margin: 10px; 
+  border: 1px solid #000;
+  border-radius: 10px
+}
+
+.row.main-row-col {
+  background-color: white;
+  padding: 10px;  
+  margin: 10px; 
+
+}
+
+.mainDiv {
+  margin-top:220px;
+}
+
+.error{
+  color:red;
+  margin-top: 2;
+  width: max-content;
+  font-size: 12px;
+  text-overflow:unset;
+}
