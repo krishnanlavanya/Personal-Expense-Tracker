@@ -1,0 +1,66 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/public/css/blogcss.css" />
+  <%- include('../views/partials/links'); %>
+  <script type="text/javascript">
+    function alertFun() {
+      alert('To change password mail has been sent to you.');
+    }
+  </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-primary navbar-light">
+    <div class="container mt-1">
+      <h2 class="text-white">Fintrak</h2>
+      <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse"
+        data-target="#collapsenavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="d-flex justify-content-center">
+      <form class="mt-4 col-md-6" id="addadmin" action="/forget" method="post">
+        <div class="form-group">
+          <label for="emailID">Email ID</label>
+          <input type="email" class="form-control" id="emailID" name="emailID" placeholder="Email" required>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-info mt-2" onclick="alertFun()">Submit</button>
+          <button class="btn btn-danger mt-2 ml-1"><a href="/login" class="text-light"> Cancel </a></button>
+        </div>
+      </form>
+    </div>
+
+
+
+    <%- include('../views/partials/footer'); %>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+      <script>
+        jQuery("#addadmin").validate({
+          rules: {
+            email: {
+              required: true,
+              email: true
+            },
+          },
+          messages: {
+            emailID: {
+              required: "Please enter email",
+              email: "Please enter valid email"
+            },
+          },
+          submitHandler: function (form) {
+            form.submit();
+          }
+        });
+      </script>
+</body>
+
+</html>

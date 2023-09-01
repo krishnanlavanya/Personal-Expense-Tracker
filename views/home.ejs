@@ -1,0 +1,124 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/css/blogcss.css" />
+  <style>
+* {
+  box-sizing: border-box;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 600px;
+}
+.column1 {
+  float: left;
+  width: 48%;
+  padding: 10px;
+  height: 600px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+  </style>
+  <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+  <%- include('../views/partials/links'); %>
+
+</head>
+
+<body>
+
+  <!-- header part -->
+
+  <nav class="navbar navbar-expand-lg bg-primary navbar-light">
+    <div class="container mt-1">
+      <h2 class="text-white">Fintrak</h2>
+      <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse"
+        data-target="#collapsenavbar">
+        <span class="navbar-toggler-icon "></span>
+      </button>
+      <div class="collapse navbar-collapse text-center" id="collapsenavbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item px-2">
+            <a href="/home" class="nav-link text-dark"> HOME </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/myexpense" class="nav-link text-white"> EXPENSES </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/allreminders" class="nav-link text-white"> REMINDER </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/profile" class="nav-link text-white"> RROFILE </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/logout" class="nav-link text-white"> LOGOUT </a>
+          </li>
+          <li class="nav-item px-4">
+            <b> <a class="nav-link text-white"> <i class="fa fa-user" style="font-size:20px;"></i>&nbsp;<%= username %> </a> </b>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="row">
+    <div class="column1">
+      <div id="container1" class="mt-5"></div>
+    </div>
+    <div class="column">
+      <div id="container2" class="mt-5"></div>
+    </div>
+  </div>
+
+  <div id="container1" style="width: 40%; height: 70%" class="mt-5"></div>  
+  <div id="container2" style="width: 50%; height: 70%" class="mt-5"></div>
+
+
+
+  <%- include('../views/partials/footer'); %>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script>
+  
+      
+      anychart.onDocumentReady(function () {
+      {
+        let data = <%- JSON.stringify(finalArray[0]) %>;
+       
+        var chart = anychart.pie();
+
+        chart.title("Expense Chart");
+
+        chart.data(data);
+        chart.legend().position("right");
+        chart.legend().itemsLayout("vertical");
+        chart.container('container1');
+        chart.draw();
+
+
+        // create a column chart
+          var chart1 = anychart.column();
+
+          // create a data series
+          var series = chart1.column(<%- JSON.stringify(finalArray[1]) %>);
+
+          // add axis titles
+          chart1.xAxis().title("Months");
+          chart1.yAxis().title("Expense");
+
+          chart1.container("container2");
+          chart1.draw();
+      }
+    });
+
+    </script>
+</body>
+
+</html>

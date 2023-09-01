@@ -1,0 +1,106 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/public/css/blogcss.css" />
+  <%- include('../views/partials/links'); %>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary navbar-light">
+      <div class="container mt-1">
+        <h2 class="text-white">Fintrak</h2>
+        <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapsenavbar">
+          <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="collapse navbar-collapse text-center" id="collapsenavbar">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item px-2">
+              <a href="/expenses" class="nav-link text-white"> EXPENSES </a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="/requests" class="nav-link text-white"> REQUESTS </a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="/users" class="nav-link text-white"> USERS </a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="/alladmin" class="nav-link text-dark"> ADMINS </a>
+            </li>
+            <li class="nav-item px-2">
+              <a href="/logout" class="nav-link text-white"> LOGOUT </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+  <div class="container mt-3">
+    <h3 class="text-center">Add Admin Here</h3>
+    <div class="d-flex justify-content-center">
+      <form class="mt-4 col-md-6" id="addadmin" action="/admin" method="post">
+        <div class="form-group">
+          <label for="contactNo"></label>
+          <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name" required>
+        </div>
+        <div class="form-group">
+          <label for="emailID">Email ID</label>
+          <input type="email" class="form-control" id="emailID" name="emailID" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-info mt-2">Submit</button>
+          <button class="btn btn-danger mt-2 ml-1"><a href="/alladmin" class="text-light"> Cancel </a></button>
+        </div>
+      </form>
+    </div>
+
+
+
+    <%- include('../views/partials/footer'); %>
+
+      <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+      <script>
+        jQuery("#addadmin").validate({
+          rules: {
+            firstName: "required",
+            lastName: "required",
+            email: {
+              required: true,
+              email: true
+            },
+            contactNo: {
+              required: true
+            },
+            password: {
+              required: true,
+              minlength: 5
+            },
+          },
+          messages: {
+            firstName: "Please enter firstname",
+            lastName: "Please enter lastname",
+            emailID: {
+              required: "Please enter email",
+              email: "Please enter valid email"
+            },
+            contactNo: {
+              required: "Please enter contact number"
+            },
+            password: {
+              required: "Please enter password",
+              minlength: "Password must be contains 5 char"
+            }
+          },
+          submitHandler: function (form) {
+            form.submit();
+          }
+        });
+      </script>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<html>
+
+<head>
+  <%- include('../views/partials/links'); %>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/validation.css" />
+    <link rel="stylesheet" href="/css/blogcss.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-primary navbar-light">
+    <div class="container mt-1">
+      <h2 class="text-white">Fintrak</h2>
+      <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapsenavbar">
+        <span class="navbar-toggler-icon "></span>
+      </button>
+  
+      <div class="collapse navbar-collapse text-center" id="collapsenavbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item px-2">
+            <a href="/home" class="nav-link text-white"> HOME </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/myexpense" class="nav-link text-white"> EXPENSES </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/allreminders" class="nav-link text-dark"> REMINDER </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/profile" class="nav-link text-white"> PROFILE </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/logout" class="nav-link text-white"> LOGOUT </a>
+          </li>
+          <li class="nav-item px-4">
+           <b> <a class="nav-link text-white"> <i class="fa fa-user" style="font-size:20px;"></i>&nbsp;<%= username %> </a> </b>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+        <nav class="navbar navbar-expand-lg bg-white mt-3">
+          <div class="container">
+        
+            <div class="collapse navbar-collapse text-center" id="collapsenavbar">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item px-4">
+                  <button type="button" class="btn btn-secondary p-0"><a href="/reminder" class="nav-link text-white"> Add
+                      Reminder </a></button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+  <% function formatDate(dateObject) { let d=new Date(dateObject); let day=d.getDate(); let month=d.getMonth() + 1; let
+    year=d.getFullYear(); if (day < 10) { day="0" + day; } if (month < 10) { month="0" + month; } let date=month + "-" +
+    day + "-" + year; return date; }; %>
+
+  <div class="main-wrapper mt-0">
+    <div class="container main-container">
+      <% reminders.forEach(reminder=> { %>
+        <div class="row main-row mt-2">
+          <div class="col-12 align-center">
+            <div class="row p-3">
+              <div class="col-5 align-middle">
+  
+                <h5> <%= formatDate(reminder.date) %> </h5>
+                <h6> Subject: <%= reminder.subject %> </h6>
+                <h6> Receiver: <%= reminder.emailID %> </h6>
+
+              </div>
+  
+              <div class="col-5 align-middle mt-4">
+
+                <h6>Interval: <%= reminder.interval %></h6>
+                <h6>Sender: fintrak.alert@gmail.com </h6>
+                
+              </div>
+  
+              <div class="col-2 mt-3">
+  
+                <a href="/reminder/<%= reminder._id %>" class="btn btn-danger btn-block">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+
+
+  <%- include('../views/partials/footer'); %>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+
+</body>
+
+</html>

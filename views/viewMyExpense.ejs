@@ -1,0 +1,112 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/css/blogcss.css" />
+
+  <%- include('../views/partials/links'); %>
+
+</head>
+
+<body>
+
+  <!-- header part -->
+
+  <nav class="navbar navbar-expand-lg bg-primary navbar-light">
+    <div class="container mt-1">
+      <h2 class="text-white">Fintrak</h2>
+      <button class="navbar-toggler btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapsenavbar">
+        <span class="navbar-toggler-icon "></span>
+      </button>
+  
+      <div class="collapse navbar-collapse text-center" id="collapsenavbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item px-2">
+            <a href="/home" class="nav-link text-white"> HOME </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/myexpense" class="nav-link text-dark"> EXPENSES </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/allreminders" class="nav-link text-white"> REMINDER </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/profile" class="nav-link text-white"> PROFILE </a>
+          </li>
+          <li class="nav-item px-2">
+            <a href="/logout" class="nav-link text-white"> LOGOUT </a>
+          </li>
+          <li class="nav-item px-4">
+            <b> <a class="nav-link text-white"> <i class="fa fa-user" style="font-size:20px;"></i>&nbsp;<%= username %> </a> </b>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <nav class="navbar navbar-expand-lg bg-white mt-3">
+      <div class="container">
+    
+        <div class="collapse navbar-collapse text-center" id="collapsenavbar">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item px-4">
+              <button type="button" class="btn btn-secondary p-0"><a href="/expense" class="nav-link text-white"> Add Expense </a></button>
+            </li>
+            <li class="nav-item px-4">
+              <button type="button" class="btn btn-secondary p-0"><a href="/category" class="nav-link text-white"> Category
+                </a></button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+  <!-- page content -->
+
+  <% function formatDate(dateObject) { let d=new Date(dateObject); let day=d.getDate(); let month=d.getMonth() + 1; let
+    year=d.getFullYear(); if (day < 10) { day="0" + day; } if (month < 10) { month="0" + month; } let date=month + "-" +
+    day + "-" + year; return date; }; %>
+
+      <div class="main-wrapper mt-0">
+        <div class="container main-container">
+          
+            <table class="table table-striped mt-2">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Reimburse Status</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% expenses.forEach(expense=> { %>
+                <tr>
+                  <td><%= formatDate(expense.date) %></td>
+                  <td><%= expense.name %></td>
+                  <td><%= expense.category %></td>
+                  <td>$ <%= expense.amount %></td>
+                  <td><%= expense.status %></td>
+                  <td><a href="/expens/<%= expense._id %>" class="btn btn-danger">DELETE</a></td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+            
+        </div>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-primary mt-2" onclick="window.print()">Print</button>
+        </div>
+        
+      </div>
+
+          <div>
+            <%- include('../views/partials/footer'); %>
+          </div>
+
+
+</body>
+
+</html>
